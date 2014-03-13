@@ -1,4 +1,4 @@
-﻿namespace Gw2Mapping
+﻿namespace Gw2MappingLink
 {
     partial class Main
     {
@@ -30,10 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.xLabel = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.yLabel = new System.Windows.Forms.Label();
             this.mapLabel = new System.Windows.Forms.Label();
-            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.rotationLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -46,13 +44,6 @@
             this.xLabel.Size = new System.Drawing.Size(20, 13);
             this.xLabel.TabIndex = 0;
             this.xLabel.Text = "X: ";
-            // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.WorkerReportsProgress = true;
-            this.backgroundWorker1.WorkerSupportsCancellation = true;
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             // 
             // yLabel
             // 
@@ -71,10 +62,6 @@
             this.mapLabel.Size = new System.Drawing.Size(34, 13);
             this.mapLabel.TabIndex = 3;
             this.mapLabel.Text = "Map: ";
-            // 
-            // backgroundWorker2
-            // 
-            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
             // 
             // rotationLabel
             // 
@@ -95,7 +82,7 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -106,7 +93,7 @@
             this.Controls.Add(this.yLabel);
             this.Controls.Add(this.xLabel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "Main";
             this.Text = "Gw2Mapping-Link";
             this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
@@ -117,10 +104,8 @@
         #endregion
 
         private System.Windows.Forms.Label xLabel;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label yLabel;
         private System.Windows.Forms.Label mapLabel;
-        private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private System.Windows.Forms.Label rotationLabel;
         private System.Windows.Forms.Button button1;
     }
