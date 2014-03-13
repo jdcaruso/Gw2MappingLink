@@ -37,6 +37,7 @@ namespace Gw2MappingLink
             TimerCallback timerGetPlayerDataDelegate = new TimerCallback(GetPlayerData);
             timerGetPlayerData = new System.Threading.Timer(timerGetPlayerDataDelegate, null, 0, Timeout.Infinite); // Call the timer once.
 
+            // Accepts only 1 connection. For multi-thread refer to: http://stackoverflow.com/questions/4672010/multi-threading-with-net-httplistener.
             clientServer.Prefixes.Add("http://localhost:1337/");
             clientServer.Start();
             clientServer.BeginGetContext(new AsyncCallback(ClientServerGetContext), clientServer);
@@ -49,27 +50,25 @@ namespace Gw2MappingLink
 
         private void GetPlayerData(object stateObject)
         {
-            if (mumbleLink.parse())
+            mumbleLink.parse();
+            player.parse(mumbleLink);
+
+            if (player.mapID != 0 && player.mapID != map.currentID)
             {
-                player.parse(mumbleLink);
-
-                if (player.mapID != map.currentID)
-                {
-                    map.GetData(player.mapID);
-                }
-
-                // Update UI thread.
-                try
-                {
-                    Invoke(updateUIMethod);
-                }
-                catch (ObjectDisposedException)
-                {
-                    // Absorb it.
-                }
+                map.GetData(player.mapID);
             }
 
-            timerGetPlayerData.Change(500, Timeout.Infinite); // Restart timer and call it once.
+            // Update UI thread.
+            try
+            {
+                Invoke(updateUIMethod);
+            }
+            catch (ObjectDisposedException)
+            {
+                // Absorb it.
+            }
+
+            timerGetPlayerData.Change(1000, Timeout.Infinite); // Restart timer and call it once.
         }
 
         private void UpdateUI()
@@ -111,6 +110,9 @@ namespace Gw2MappingLink
             st.Write(buffer, 0, buffer.Length);
 
             context.Response.Close();
+
+            // Start accepting a new connection.
+            clientServer.BeginGetContext(new AsyncCallback(ClientServerGetContext), clientServer);
         }
     }
 }

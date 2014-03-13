@@ -90,6 +90,8 @@ namespace Gw2MappingLink
             coord.camRotation = camDegrees.ToString();
             coord.playerRotation = playerDegrees.ToString();
             coord.mapName = this.currentName.ToString();
+
+            this.coordinate = coord;
         }
     }
 }

@@ -28,23 +28,18 @@ namespace Gw2MappingLink
 
         public MemoryMap data = new MemoryMap();
 
-        public bool parse()
+        public MumbleLink()
         {
-            using (mmFile = MemoryMappedFile.CreateOrOpen("MumbleLink", Marshal.SizeOf(data)))
+            if (mmFile == null)
             {
-                if (mmFile != null)
-                {
-                    using (mmAccessor = mmFile.CreateViewAccessor(0, Marshal.SizeOf(data)))
-                    {
-                        mmAccessor.Read(0, out data);
-                        return true;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
+                mmFile = MemoryMappedFile.CreateOrOpen("MumbleLink", Marshal.SizeOf(data), MemoryMappedFileAccess.ReadWrite);
+                mmAccessor = mmFile.CreateViewAccessor(0, Marshal.SizeOf(data));
             }
+        }
+
+        public void parse()
+        {
+            mmAccessor.Read(0, out data);
         }
     }
 }
