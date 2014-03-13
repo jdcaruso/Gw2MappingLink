@@ -98,7 +98,7 @@ namespace Gw2MappingLink
 
         private static void ClientServerGetContext(IAsyncResult result)
         {
-            HttpListenerContext context = clientServer.GetContext();
+            HttpListenerContext context = clientServer.EndGetContext(result);
             HttpListenerResponse response = context.Response;
             response.AppendHeader("Access-Control-Allow-Origin", "*");
 
