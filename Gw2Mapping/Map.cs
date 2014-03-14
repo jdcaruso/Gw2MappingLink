@@ -16,6 +16,7 @@ namespace Gw2MappingLink
             public string camRotation { get; set; }
             public string playerRotation { get; set; }
             public string mapName { get; set; }
+            public string worldID { get; set; }
         }
 
         public int currentID { get; private set; }
@@ -28,10 +29,9 @@ namespace Gw2MappingLink
         public int cTop { get; private set; }
         public int cWidth { get; private set; }
         public int cHeight { get; private set; }
-
         public float playerPosX { get; set; }
         public float playerPosY { get; set; }
-
+        public int worldID { get; set; }
         private Coordinate coordinate { get; set; }
 
         public Map()
@@ -54,7 +54,7 @@ namespace Gw2MappingLink
 
             //Get JSON data from gw2 map API
             WebClient c = new WebClient();
-            var data = c.DownloadString("https://api.guildwars2.com/v1/maps.json?map_id=" + mapID);
+            var data = c.DownloadString("https://api.guildwars2.com/v1/maps.json?map_id=" + mapID);                   
             JObject o = JObject.Parse(data);
             dynamic mapData = JsonConvert.DeserializeObject(data);
 
@@ -90,6 +90,7 @@ namespace Gw2MappingLink
             coord.camRotation = camDegrees.ToString();
             coord.playerRotation = playerDegrees.ToString();
             coord.mapName = this.currentName.ToString();
+            coord.worldID = this.worldID.ToString();
 
             this.coordinate = coord;
         }

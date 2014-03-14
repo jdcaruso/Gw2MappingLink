@@ -24,6 +24,7 @@ namespace Gw2MappingLink
             public uint context_len;
             public fixed byte context[512];
             public fixed byte description[4096];
+
         };
 
         public MemoryMap data = new MemoryMap();

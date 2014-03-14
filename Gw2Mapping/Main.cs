@@ -68,7 +68,7 @@ namespace Gw2MappingLink
                 // Absorb it.
             }
 
-            timerGetPlayerData.Change(1000, Timeout.Infinite); // Restart timer and call it once.
+            timerGetPlayerData.Change(50, Timeout.Infinite); // Restart timer and call it once.
         }
 
         private void UpdateUI()
@@ -81,6 +81,7 @@ namespace Gw2MappingLink
 
             map.playerPosX = (map.cLeft + (map.cWidth * mapPctZero));
             map.playerPosY = ((map.cTop + map.cHeight) - (map.cHeight * mapPctOne));
+            map.worldID = player.worldID;
             //Gets final continent coordinates for player position                   
             xLabel.Text = "X: " + map.playerPosX.ToString();
             yLabel.Text = "Y: " + map.playerPosY.ToString();
@@ -92,7 +93,6 @@ namespace Gw2MappingLink
 
             rotationLabel.Text = "Rotation: " + camDegrees.ToString();
             mapLabel.Text = "Map: " + map.currentName;
-
             map.UpdateCoordinate(camDegrees, playerDegrees);
         }
 

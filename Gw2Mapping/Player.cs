@@ -19,6 +19,7 @@ namespace Gw2MappingLink
         public float z { get; private set; }
 
         public string identity { get; private set; } // Player's name.
+        public int worldID { get; private set; } // The world identification number where the player is in
         public int mapID { get; private set; } // The map identification number where the player is in.
 
         public void parse(MumbleLink mumbleLink)
@@ -35,6 +36,7 @@ namespace Gw2MappingLink
                     this.rotationX = (double)(_data->fAvatarFront[0]);
                     this.rotationY = (double)(_data->fAvatarFront[2]);
                     this.mapID = (int)_data->context[28] + ((int)_data->context[29] * 256);
+                    this.worldID = (int)_data->context[36] + ((int)_data->context[37] * 256);
                 }
             }
         }
